@@ -6,6 +6,9 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
+        build:
+            context: .
+            dockerfile: docker/app/Dockerfile
         ports:
             - 8876:80
         depends_on:
