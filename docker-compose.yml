@@ -14,6 +14,8 @@ services:
         depends_on:
             - app
         container_name: laravel_vue_trello_nginx
+        networks:
+            - laravel_vue_trello_network
 
     app:
         build:
@@ -24,6 +26,8 @@ services:
         container_name: laravel_vue_trello_app
         depends_on:
             - db
+        networks:
+            - laravel_vue_trello_network
 
     db:
         image: mysql:8.0
@@ -37,9 +41,16 @@ services:
             - 8101:3306
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
         container_name: laravel_vue_trello_db
+        networks:
+            - laravel_vue_trello_network
 
     adminer:
         image: adminer
         restart: always
         ports:
             - 8080:8080
+        networks:
+            - laravel_vue_trello_network
+
+networks:
+    laravel_vue_trello_network:
